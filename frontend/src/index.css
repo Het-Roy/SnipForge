@@ -1,0 +1,283 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: #020617; /* Very dark slate, almost black */
+    color: #f8fafc; /* slate-50 */
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    background-image: radial-gradient(circle at 50% 0%, #171717 0%, #020617 70%);
+    background-attachment: fixed;
+    overflow-x: hidden;
+  }
+
+  code,
+  pre {
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #020617;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #1e293b;
+    border-radius: 10px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #334155;
+  }
+}
+
+@layer components {
+  /* Premium Glassmorphic Card */
+  .card {
+    @apply bg-slate-900/40 backdrop-blur-xl border border-slate-800/50 rounded-2xl p-6 shadow-2xl transition-all duration-500 hover:border-indigo-500/40 hover:bg-slate-800/60 hover:shadow-indigo-500/10 hover:-translate-y-1;
+  }
+
+  /* Primary Button - More refined */
+  .btn-primary {
+    @apply bg-indigo-600 hover:bg-indigo-500 text-white font-bold tracking-tight flex items-center justify-center px-6 py-2.5 rounded-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-indigo-600/20 hover:shadow-indigo-500/40 active:scale-95;
+  }
+
+  /* Ghost Button */
+  .btn-ghost {
+    @apply bg-transparent border border-slate-700 hover:border-slate-500 text-slate-300 hover:text-white font-semibold flex items-center justify-center px-6 py-2.5 rounded-xl transition-all duration-300 hover:bg-slate-800/50 active:scale-95;
+  }
+
+  /* Inputs */
+  .input {
+    @apply w-full bg-slate-950/40 border border-slate-800 rounded-xl px-4 py-3 text-white placeholder-slate-600 focus:outline-none focus:border-indigo-500/50 focus:ring-4 focus:ring-indigo-500/10 transition-all duration-300;
+  }
+
+  .textarea {
+    @apply w-full bg-slate-950/40 border border-slate-800 rounded-xl px-4 py-3 text-white placeholder-slate-600 focus:outline-none focus:border-indigo-500/50 focus:ring-4 focus:ring-indigo-500/10 transition-all duration-300 resize-none;
+  }
+
+  .label {
+    @apply block text-sm font-bold text-slate-400 mb-2 tracking-tight;
+  }
+
+  .container-page {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .section-title {
+    @apply text-4xl font-black text-white tracking-tighter;
+  }
+
+  .text-muted {
+    @apply text-slate-500 text-sm font-medium;
+  }
+
+  .code-preview {
+    @apply bg-slate-950/60 border border-slate-800/80 rounded-xl p-4 font-mono text-sm text-slate-400 overflow-hidden;
+    max-height: 10rem;
+  }
+
+  .tag-pill {
+    @apply bg-slate-800/40 text-slate-400 text-xs px-3 py-1 rounded-lg border border-slate-700/50 hover:text-white hover:border-slate-500 transition-all cursor-default;
+  }
+
+  .nav-active {
+    @apply text-white font-bold;
+  }
+}
+
+.app-shell {
+  position: relative;
+}
+
+.app-shell > *:not(.pointer-events-none) {
+  position: relative;
+  z-index: 2;
+}
+
+/* Give the sticky navbar a higher stacking order than page content */
+.app-shell > nav {
+  z-index: 10;
+}
+
+.fx-grid {
+  position: absolute;
+  inset: 0;
+  opacity: 0.14;
+  background-image:
+    linear-gradient(rgba(148, 163, 184, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148, 163, 184, 0.08) 1px, transparent 1px);
+  background-size: 80px 80px;
+  mask-image: radial-gradient(circle at center, black 20%, transparent 80%);
+}
+
+.fx-ambient {
+  position: absolute;
+  width: 32rem;
+  height: 32rem;
+  border-radius: 9999px;
+  filter: blur(120px);
+  opacity: 0.14;
+  animation: ambient-float 16s ease-in-out infinite;
+}
+
+.fx-ambient-one {
+  top: -8rem;
+  left: -10rem;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.4), transparent 68%);
+}
+
+.fx-ambient-two {
+  right: -12rem;
+  bottom: -10rem;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.24), transparent 70%);
+  animation-delay: -8s;
+}
+
+.fx-mouse-glow,
+.fx-mouse-ring {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition:
+    opacity 220ms ease,
+    transform 180ms ease,
+    width 220ms ease,
+    height 220ms ease,
+    border-color 220ms ease,
+    box-shadow 220ms ease;
+  will-change: transform, opacity;
+}
+
+.fx-mouse-glow {
+  width: 18rem;
+  height: 18rem;
+  border-radius: 9999px;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.16), rgba(56, 189, 248, 0.08) 35%, transparent 72%);
+  filter: blur(14px);
+}
+
+.fx-mouse-glow-active {
+  width: 22rem;
+  height: 22rem;
+  background: radial-gradient(circle, rgba(129, 140, 248, 0.2), rgba(45, 212, 191, 0.1) 38%, transparent 74%);
+}
+
+.fx-mouse-ring {
+  width: 1.15rem;
+  height: 1.15rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(165, 180, 252, 0.85);
+  box-shadow: 0 0 18px rgba(99, 102, 241, 0.35);
+}
+
+.fx-mouse-ring-active {
+  width: 2.2rem;
+  height: 2.2rem;
+  border-color: rgba(45, 212, 191, 0.8);
+  box-shadow: 0 0 26px rgba(45, 212, 191, 0.32);
+}
+
+.fx-surface {
+  position: relative;
+  transform-origin: center;
+  transition:
+    transform 220ms ease,
+    box-shadow 220ms ease,
+    border-color 220ms ease,
+    background-color 220ms ease,
+    color 220ms ease;
+}
+
+.fx-surface::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 220ms ease;
+  background: linear-gradient(135deg, rgba(129, 140, 248, 0.14), transparent 45%, rgba(45, 212, 191, 0.12));
+}
+
+.fx-surface:hover,
+.fx-surface:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.28);
+}
+
+.fx-surface:hover::after,
+.fx-surface:focus-visible::after {
+  opacity: 1;
+}
+
+/* Custom premium animations */
+@keyframes ambient-float {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(0, -18px, 0) scale(1.06); }
+}
+
+@keyframes soft-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fx-ambient,
+  .animate-soft-float,
+  .animate-fade-in,
+  .animate-fade-in-soft,
+  .animate-page-fade {
+    animation: none !important;
+  }
+
+  .fx-mouse-glow,
+  .fx-mouse-ring,
+  .fx-surface {
+    transition: none !important;
+  }
+}
+
+.animate-soft-float {
+  animation: soft-float 4s ease-in-out infinite;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.5s ease-out forwards;
+}
+
+@keyframes fade-in-soft {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in-soft {
+  animation: fade-in-soft 0.35s ease-out forwards;
+}
+
+@keyframes page-fade {
+  from { opacity: 0; transform: translateY(8px); filter: blur(4px); }
+  to { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+
+.animate-page-fade {
+  animation: page-fade 0.45s ease-out;
+}
