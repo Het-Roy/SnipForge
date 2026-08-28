@@ -43,7 +43,4 @@ const SnippetSchema = new mongoose.Schema({
   ratings: [RatingSchema],
 }, { timestamps: true });
 
-// Text index for search
-SnippetSchema.index({ title: 'text', description: 'text', tags: 'text' });
-
 module.exports = mongoose.model('Snippet', SnippetSchema);
