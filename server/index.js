@@ -31,12 +31,19 @@ const limiter = rateLimit({
 });
 app.use('/api/', limiter);
 
-const allowedOrigins = [process.env.CLIENT_URL || 'http://localhost:3000'];
+// Support multiple allowed origins via comma-separated CLIENT_URL env var
+const allowedOrigins = [
+  'http://localhost:3000',
+  ...(process.env.CLIENT_URL ? process.env.CLIENT_URL.split(',').map(o => o.trim()) : [])
+];
+
 app.use(cors({
   origin: function (origin, callback) {
+    // Allow server-to-server requests (no origin) or whitelisted origins
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
+      console.error(`CORS blocked origin: ${origin}`);
       callback(new Error('Not allowed by CORS'));
     }
   },
