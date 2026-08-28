@@ -15,13 +15,11 @@ const SnippetSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Title is required'],
     trim: true,
-    minlength: [3, 'Title must be at least 3 characters'],
   },
   description: {
     type: String,
     required: [true, 'Description is required'],
     trim: true,
-    minlength: [10, 'Description must be at least 10 characters'],
   },
   language: {
     type: String,
@@ -30,7 +28,6 @@ const SnippetSchema = new mongoose.Schema({
   code: {
     type: String,
     required: [true, 'Code is required'],
-    minlength: [10, 'Code must be at least 10 characters'],
   },
   tags: [{ type: String, trim: true }],
   author: {
